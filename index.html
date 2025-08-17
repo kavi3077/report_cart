@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+  />
+  <title>Student Report Card Generator · EASWARI ENGINEERING COLLEGE</title>
+  <meta name="theme-color" content="#004aad" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- PWA iOS standalone -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="EEC Logo" class="logo" />
+      <div class="titles">
+        <h1>EASWARI ENGINEERING COLLEGE</h1>
+        <p class="subtitle">Student Report Card Generator (8 Semesters)</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="installBtn" class="btn secondary" hidden>Install App</button>
+      <button id="resetBtn" class="btn ghost" title="Clear current form">Reset</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Student meta -->
+    <section class="card" id="student-meta">
+      <h2>Student Details</h2>
+      <div class="grid g-4">
+        <label>Student Name
+          <input id="studentName" type="text" placeholder="e.g., S. Karthik" required />
+        </label>
+        <label>Register No.
+          <input id="registerNo" type="text" placeholder="e.g., 21ECE1234" required />
+        </label>
+        <label>Department
+          <input id="department" type="text" placeholder="e.g., CSE / ECE / MECH" required />
+        </label>
+        <label>Programme
+          <input id="programme" type="text" placeholder="e.g., B.E / B.Tech" />
+        </label>
+        <label>Batch (YYYY–YYYY)
+          <input id="batch" type="text" placeholder="e.g., 2021–2025" />
+        </label>
+        <label>Advisor
+          <input id="advisor" type="text" placeholder="e.g., Dr. A. Priya" />
+        </label>
+      </div>
+    </section>
+
+    <!-- Semesters -->
+    <section class="card" id="semesters">
+      <h2>Semesters & Scores</h2>
+      <p class="muted">Each semester has 6 subjects. You can also add NPTEL and Additional Courses.</p>
+      <div id="semContainer"></div>
+    </section>
+
+    <!-- Actions -->
+    <section class="card actions">
+      <div class="actions-row">
+        <button id="generatePdfBtn" class="btn primary">Download PDF</button>
+        <button id="printBtn" class="btn secondary">Print</button>
+      </div>
+      <p class="muted small">
+        Tip: “Print” can also save as PDF with your browser’s print dialog. “Download PDF” produces a branded, multi‑page PDF automatically.
+      </p>
+    </section>
+
+    <!-- Render-only: report preview target -->
+    <section class="card" id="preview">
+      <h2>Preview</h2>
+      <div id="reportRoot" class="report">
+        <!-- Filled dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>© <span id="year"></span> EASWARI ENGINEERING COLLEGE · Report Card Generator</p>
+  </footer>
+
+  <!-- Libraries (bundled locally for offline) -->
+  <script src="libs/html2canvas.min.js"></script>
+  <script src="libs/jspdf.umd.min.js"></script>
+
+  <!-- App -->
+  <script src="app.js"></script>
+
+  <!-- Register SW -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+</body>
+</html>
